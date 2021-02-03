@@ -1,10 +1,84 @@
 /* eslint-disable */
 import "bootstrap";
 import "./style.css";
+// funcion generadora de cartas aleatorias
+function myFunction() {
+  var cartas = document.getElementById("carta").value;
+  console.log(cartas);
+  randomCardNumberGenerator(cartas);
+  cardGenerator(arrFinal);
+  console.log(arrFinal);
+}
+//funcion que devuelve las cartas ordenadas de menor a mayor
+function arrOrdenado() {
+  bubble(arrFinal);
+  cardGenerator(ordenado);
+}
+// funcion que ejecuta el algoritmo burbuja(Bubble Sort)
+function bubble(arr) {
+  console.log(arr);
+  var len = arr.length;
+  for (var i = 0; i < len; i++) {
+    for (let j = 0; j < len - i - 1; j++) {
+      if (arr[j].num > arr[j + 1].num) {
+        var temp = arr[j].num;
+        arr[j].num = arr[j + 1].num;
+        arr[j + 1].num = temp;
+      }
+    }
+  }
+  Array.prototype.push.apply(ordenado, arr);
+  console.log(ordenado);
+}
+// seccion donde se configura la accion que ejecutan los botones en el HTML
+var btn = document.getElementById("draw");
+btn.onclick = myFunction;
+var btn2 = document.getElementById("sort");
+btn2.onclick = arrOrdenado;
+//bloques de vectores (arrays)
+let suiteArray = ["&#9824", "&#9827", "&#9829", "&#9830"];
+let numberArray = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+let numberArray2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+var arrFinal = [];
+var ordenado = [];
+//funcion que genera los valores aleatorios
+const randomCardNumberGenerator = inputValue => {
+  for (let i = 0; i < inputValue; i++) {
+    var suit = suiteArray[Math.floor(Math.random() * suiteArray.length)];
+    let numb = numberArray2[Math.floor(Math.random() * numberArray2.length)];
+    arrFinal.push({ suit: suit, num: numb });
+  }
+};
+//funcion que genera los cuerpos y los objectos que contienen las cartas
+const cardGenerator = anArrayOfObjects => {
+  var newArrayOfObjects = anArrayOfObjects.map(item => {
+    let cardContainer = document.createElement("div");
+    let cardHeader = document.createElement("div");
+    let cardBody = document.createElement("div");
+    let cardFooter = document.createElement("div");
+    cardContainer.className =
+      "custom-card justify-content-center border rounded px-2 mt-5 col mr-2";
+    cardHeader.className = "custom-card-header";
+    cardFooter.className = "custom-card-footer";
+    cardBody.className = "custom-card-body";
+    console.log(item);
+    //Ifs que determinan el color del simbolo de la carta
+    if (item.suit == "&#9829" || item.suit == "&#9830") {
+      cardHeader.style.color = "red";
+    }
 
-import "./assets/img/rigo-baby.jpg";
-import "./assets/img/4geeks.ico";
+    if (item.suit == "&#9829" || item.suit == "&#9830") {
+      cardFooter.style.color = "red";
+    }
 
-window.onload = function() {
-  console.log("Hello Rigo from the console!");
+    cardHeader.innerHTML = item.suit;
+    cardBody.innerHTML = item.num;
+    cardFooter.innerHTML = item.suit;
+    document.querySelector("#main-container").appendChild(cardContainer);
+    cardContainer.appendChild(cardHeader);
+    cardContainer.appendChild(cardBody);
+    cardContainer.appendChild(cardFooter);
+    console.log(arrFinal);
+    return item;
+  });
 };
