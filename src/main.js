@@ -37,15 +37,14 @@ var btn2 = document.getElementById("sort");
 btn2.onclick = arrOrdenado;
 //bloques de vectores (arrays)
 let suiteArray = ["&#9824", "&#9827", "&#9829", "&#9830"];
-let numberArray = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
-let numberArray2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+let numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 var arrFinal = [];
 var ordenado = [];
 //funcion que genera los valores aleatorios
 const randomCardNumberGenerator = inputValue => {
   for (let i = 0; i < inputValue; i++) {
     var suit = suiteArray[Math.floor(Math.random() * suiteArray.length)];
-    let numb = numberArray2[Math.floor(Math.random() * numberArray2.length)];
+    let numb = numberArray[Math.floor(Math.random() * numberArray.length)];
     arrFinal.push({ suit: suit, num: numb });
   }
 };
@@ -62,12 +61,9 @@ const cardGenerator = anArrayOfObjects => {
     cardFooter.className = "custom-card-footer";
     cardBody.className = "custom-card-body";
     console.log(item);
-    //Ifs que determinan el color del simbolo de la carta
+    //If que determinan el color del simbolo de la carta
     if (item.suit == "&#9829" || item.suit == "&#9830") {
       cardHeader.style.color = "red";
-    }
-
-    if (item.suit == "&#9829" || item.suit == "&#9830") {
       cardFooter.style.color = "red";
     }
 
