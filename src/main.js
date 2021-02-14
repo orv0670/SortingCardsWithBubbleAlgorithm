@@ -3,8 +3,8 @@ import "./style.css";
 
 window.onload = function() {
   //Arrays
-  var suiteArray = ["&#9824", "&#9827", "&#9829", "&#9830"];
-  var numberArray = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+  var suiteArray = ["&#9830", "&#9824", "&#9827", "&#9829"];
+  var numberArray = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
   var cardsNumbers = [];
 
   // botones
