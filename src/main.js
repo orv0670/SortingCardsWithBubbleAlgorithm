@@ -1,80 +1,105 @@
-/* eslint-disable */
 import "bootstrap";
 import "./style.css";
-// funcion generadora de cartas aleatorias
-function myFunction() {
-  var cartas = document.getElementById("carta").value;
-  console.log(cartas);
-  randomCardNumberGenerator(cartas);
-  cardGenerator(arrFinal);
-  console.log(arrFinal);
-}
-//funcion que devuelve las cartas ordenadas de menor a mayor
-function arrOrdenado() {
-  bubble(arrFinal);
-  cardGenerator(ordenado);
-}
-// funcion que ejecuta el algoritmo burbuja(Bubble Sort)
-function bubble(arr) {
-  console.log(arr);
-  var len = arr.length;
-  for (var i = 0; i < len; i++) {
-    for (let j = 0; j < len - i - 1; j++) {
-      if (arr[j].num > arr[j + 1].num) {
-        var temp = arr[j].num;
-        arr[j].num = arr[j + 1].num;
-        arr[j + 1].num = temp;
+
+window.onload = function() {
+  //Arrays
+  var suiteArray = ["&#9824", "&#9827", "&#9829", "&#9830"];
+  var numberArray = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+  var cardsNumbers = [];
+
+  // botones
+  const drawButton = document.getElementById("draw");
+  const sortButton = document.getElementById("sort");
+  let cardsUbication = document.querySelector("#cards");
+
+  // evento onClick del boton draw
+  drawButton.addEventListener("click", function() {
+    //captura del valor del input
+    cardsNumbers = [];
+    var cardsAmount = document.getElementById("input1").value;
+    cardsUbication.innerHTML = " ";
+
+    for (let i = 0; i < cardsAmount; i++) {
+      //Generador de las cartas en el HTML
+      let division = document.createElement("DIV");
+      division.innerHTML =
+        "<div class='Suit1'></div><div class='number'></div><div class='Suit2'></div>";
+      division.classList.add("card");
+      cardsUbication.appendChild(division);
+
+      //funciones randoms
+      var randomSuit = Math.floor(Math.random() * 4);
+      var randomNumber = Math.floor(Math.random() * 13);
+      //actualizacion del array cardsNumber (funcion push)
+      cardsNumbers.push(randomNumber);
+
+      //ubicacion de los simbolos y numeros de las cartas
+      var suitUbication1 = document.getElementsByClassName("Suit1");
+      var numberUbication = document.getElementsByClassName("number");
+      var suitUbication2 = document.getElementsByClassName("Suit2");
+
+      // ifs de asignacion
+      if (randomSuit == 0) {
+        var suit1 = suiteArray[randomSuit];
+        suitUbication1[i].innerHTML = suit1;
+        var num = numberArray[randomNumber];
+        numberUbication[i].innerHTML = num;
+        var suit2 = suiteArray[randomSuit];
+        suitUbication2[i].innerHTML = suit2;
+        suitUbication1[i].style.color = "red";
+        suitUbication2[i].style.color = "red";
+        numberUbication[i].style.color = "red";
+      } else if (randomSuit == 1) {
+        suit1 = suiteArray[randomSuit];
+        suitUbication1[i].innerHTML = suit1;
+        num = numberArray[randomNumber];
+        numberUbication[i].innerHTML = num;
+        suit2 = suiteArray[randomSuit];
+        suitUbication2[i].innerHTML = suit2;
+      } else if (randomSuit == 2) {
+        suit1 = suiteArray[randomSuit];
+        suitUbication1[i].innerHTML = suit1;
+        num = numberArray[randomNumber];
+        numberUbication[i].innerHTML = num;
+        suit2 = suiteArray[randomSuit];
+        suitUbication2[i].innerHTML = suit2;
+      } else if (randomSuit == 3) {
+        suit1 = suiteArray[randomSuit];
+        suitUbication1[i].innerHTML = suit1;
+        num = numberArray[randomNumber];
+        numberUbication[i].innerHTML = num;
+        suit2 = suiteArray[randomSuit];
+        suitUbication2[i].innerHTML = suit2;
+        suitUbication1[i].style.color = "red";
+        suitUbication2[i].style.color = "red";
+        numberUbication[i].style.color = "red";
       }
     }
-  }
-  Array.prototype.push.apply(ordenado, arr);
-  console.log(ordenado);
-}
-// seccion donde se configura la accion que ejecutan los botones en el HTML
-var btn = document.getElementById("draw");
-btn.onclick = myFunction;
-var btn2 = document.getElementById("sort");
-btn2.onclick = arrOrdenado;
-//bloques de vectores (arrays)
-let suiteArray = ["&#9824", "&#9827", "&#9829", "&#9830"];
-let numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-var arrFinal = [];
-var ordenado = [];
-//funcion que genera los valores aleatorios
-const randomCardNumberGenerator = inputValue => {
-  for (let i = 0; i < inputValue; i++) {
-    var suit = suiteArray[Math.floor(Math.random() * suiteArray.length)];
-    let numb = numberArray[Math.floor(Math.random() * numberArray.length)];
-    arrFinal.push({ suit: suit, num: numb });
-  }
-};
-//funcion que genera los cuerpos y los objectos que contienen las cartas
-const cardGenerator = anArrayOfObjects => {
-  var newArrayOfObjects = anArrayOfObjects.map(item => {
-    let cardContainer = document.createElement("div");
-    let cardHeader = document.createElement("div");
-    let cardBody = document.createElement("div");
-    let cardFooter = document.createElement("div");
-    cardContainer.className =
-      "custom-card justify-content-center border rounded px-2 mt-5 col mr-2";
-    cardHeader.className = "custom-card-header";
-    cardFooter.className = "custom-card-footer";
-    cardBody.className = "custom-card-body";
-    console.log(item);
-    //If que determinan el color del simbolo de la carta
-    if (item.suit == "&#9829" || item.suit == "&#9830") {
-      cardHeader.style.color = "red";
-      cardFooter.style.color = "red";
-    }
-
-    cardHeader.innerHTML = item.suit;
-    cardBody.innerHTML = item.num;
-    cardFooter.innerHTML = item.suit;
-    document.querySelector("#main-container").appendChild(cardContainer);
-    cardContainer.appendChild(cardHeader);
-    cardContainer.appendChild(cardBody);
-    cardContainer.appendChild(cardFooter);
-    console.log(arrFinal);
-    return item;
   });
+
+  // evento onClick de sort
+  sortButton.addEventListener("click", function() {
+    bubble(cardsNumbers);
+  });
+
+  // funcion que ejecuta el algoritmo burbuja(Bubble Sort)
+  function bubble(arr) {
+    let len = arr.length - 1;
+    while (len > 0) {
+      for (let i = 0; i <= len; i++) {
+        if (arr[i] > arr[i + 1]) {
+          let temp = arr[i + 1];
+          arr[i + 1] = arr[i];
+          arr[i] = temp;
+
+          // constructor de cartas ordenadas
+          let temp2 = cardsUbication.children[i + 1].innerHTML;
+          cardsUbication.children[i + 1].innerHTML =
+            cardsUbication.children[i].innerHTML;
+          cardsUbication.children[i].innerHTML = temp2;
+        }
+      }
+      len--;
+    }
+  }
 };
